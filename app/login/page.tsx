@@ -45,7 +45,7 @@ export default function Login() {
           value={email}
           onChange={(e) => setEmail(e.target.value)}
           required
-          className="w-full px-4 py-3 border border-gray-300 rounded-md focus:border-blue-600 focus:ring focus:ring-blue-200"
+          className="w-full px-4 py-3 border border-gray-300 rounded-md focus:border-blue-600 focus:ring-1 focus:ring-blue-600 focus:outline-none transition"
         />
         <input
           type="password"
@@ -53,11 +53,11 @@ export default function Login() {
           value={password}
           onChange={(e) => setPassword(e.target.value)}
           required
-          className="w-full px-4 py-3 border border-gray-300 rounded-md focus:border-blue-600 focus:ring focus:ring-blue-200"
+          className="w-full px-4 py-3 border border-gray-300 rounded-md focus:border-blue-600 focus:ring-1 focus:ring-blue-600 focus:outline-none transition"
         />
         <button
           type="submit"
-          className="w-full bg-gradient-to-r from-blue-500 to-blue-700 text-white font-semibold py-3 rounded-md transition-transform duration-200 hover:scale-105 disabled:opacity-50"
+          className="w-full bg-blue-500 text-white font-semibold py-3 rounded-md transition hover:bg-blue-600 disabled:opacity-50 cursor-pointer"
           disabled={loading}
         >
           {loading ? "Logging in..." : "Login"}
@@ -65,13 +65,21 @@ export default function Login() {
       </form>
 
       <p className="text-xs text-gray-500 mt-4">
-        Forgot your password? <a href="#" className="text-blue-500 hover:underline">Reset it here</a>.
+        Forgot your password?{" "}
+        <a href="#" className="text-blue-500 hover:underline cursor-pointer">
+          Reset it here
+        </a>
+        .
       </p>
       <p className="text-sm mt-5">
         Need help? Contact support at{" "}
-        <a href="tel:1-888-858-2546" className="text-blue-500 hover:underline">
+        <a
+          href="tel:1-888-858-2546"
+          className="text-blue-500 hover:underline cursor-pointer"
+        >
           1-888-858-2546
-        </a>.
+        </a>
+        .
       </p>
     </div>
   );
