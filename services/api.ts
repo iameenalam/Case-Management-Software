@@ -1,6 +1,5 @@
 const BASE_URL = "http://154.38.185.191:3000";
 
-// Define types
 interface SignupData {
   username: string;
   email: string;

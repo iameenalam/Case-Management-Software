@@ -16,7 +16,6 @@ const DashboardNavigation = () => {
 
   return (
     <header className="bg-blue-700 text-white p-4 flex items-center justify-between w-full">
-      {/* Left Side - Search and Title */}
       <div className="flex items-center">
         <svg
           xmlns="http://www.w3.org/2000/svg"
@@ -42,7 +41,6 @@ const DashboardNavigation = () => {
         </select>
       </div>
 
-      {/* Right Side - Time, Create New, Notifications, Profile Dropdown */}
       <div className="flex items-center relative">
         <div className="mr-4">00:00:00</div>
         <button className="bg-blue-500 hover:bg-blue-600 text-white font-bold py-2 px-4 rounded-md mr-2 cursor-pointer">
@@ -51,7 +49,6 @@ const DashboardNavigation = () => {
         <button className="mr-4 cursor-pointer">
           <Bell className="w-6 h-6" />
         </button>
-        {/* Profile Dropdown */}
         <div className="relative">
           <button
             onClick={() => setDropdownOpen(!dropdownOpen)}

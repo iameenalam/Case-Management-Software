@@ -1,4 +1,3 @@
-// app/dashboard/layout.tsx
 "use client";
 
 import DashboardNavigation from "../components/DashboardNavigation";
@@ -11,10 +10,8 @@ export default function DashboardLayout({
 }) {
   return (
     <div className="flex flex-col h-screen">
-      {/* Navigation */}
       <DashboardNavigation />
 
-      {/* Sidebar and Content */}
       <div className="flex flex-1">
         <DashboardSidebar />
         <main className="flex-1 overflow-x-hidden overflow-y-auto bg-white">

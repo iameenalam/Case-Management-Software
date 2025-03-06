@@ -46,7 +46,7 @@ const sidebarLinks = [
 
 const DashboardSidebar = () => {
   const [isCollapsed, setIsCollapsed] = useState(false);
-  const pathname = usePathname(); // Get current route
+  const pathname = usePathname();
 
   return (
     <aside
@@ -54,7 +54,6 @@ const DashboardSidebar = () => {
         isCollapsed ? "w-16" : "w-64"
       } h-screen shadow-lg`}
     >
-      {/* Collapse Button */}
       <button
         onClick={() => setIsCollapsed(!isCollapsed)}
         className="p-4 hover:bg-blue-800 transition duration-200 flex items-center justify-center"
