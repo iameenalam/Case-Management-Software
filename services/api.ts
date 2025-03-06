@@ -1,4 +1,4 @@
-const BASE_URL = "http://154.38.185.191:3000";
+const BASE_URL = process.env.NEXT_PUBLIC_BASE_URL || "http://localhost:3000";
 
 interface SignupData {
   username: string;
