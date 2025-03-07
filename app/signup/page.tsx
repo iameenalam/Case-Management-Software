@@ -18,16 +18,21 @@ export default function Signup() {
     setFormData({ ...formData, [e.target.name]: e.target.value });
   };
 
+  const [responseMessage, setResponseMessage] = useState("");
+
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     setLoading(true);
     setError("");
+    setResponseMessage("");
 
     try {
       const response = await signup(formData);
-      if (response.token) {
-        localStorage.setItem("token", response.token);
-        router.push("/dashboard");
+      if (response.message) {
+        setResponseMessage(response.message);
+        setTimeout(() => {
+          router.push("/login");
+        }, 2000);
       } else {
         setError("Signup failed. Please try again.");
       }
@@ -44,7 +49,11 @@ export default function Signup() {
         Try Clio for free
       </h1>
       <p className="text-gray-600 mb-4">Start a 7-day free trial of Clio.</p>
-      {error && <p className="text-red-500 text-sm mb-4">{error}</p>}
+      {responseMessage && (
+        <p className="text-sm mb-4 text-blue-500">{responseMessage}</p>
+      )}
+      {error && <p className="text-sm mb-4 text-red-500">{error}</p>}
+
       <form onSubmit={handleSubmit} className="flex flex-col gap-4">
         <input
           type="text"
