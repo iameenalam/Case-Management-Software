@@ -8,6 +8,7 @@ import { logout } from "@/utils/auth";
 const DashboardNavigation = () => {
   const router = useRouter();
   const [dropdownOpen, setDropdownOpen] = useState(false);
+  const [createDropdownOpen, setCreateDropdownOpen] = useState(false);
 
   const handleLogout = () => {
     logout();
@@ -33,22 +34,37 @@ const DashboardNavigation = () => {
         </svg>
         <input
           type="text"
-          placeholder="Search Ameen Alam Legal"
+          placeholder="Search"
           className="p-2 rounded-md text-black bg-white focus:outline-none"
         />
-        <select className="ml-4 p-2 rounded-md text-black bg-white focus:outline-none cursor-pointer">
-          <option>Recents</option>
-        </select>
       </div>
 
       <div className="flex items-center relative">
         <div className="mr-4">00:00:00</div>
-        <button className="bg-blue-500 hover:bg-blue-600 text-white font-bold py-2 px-4 rounded-md mr-2 cursor-pointer">
-          Create new +
-        </button>
-        <button className="mr-4 cursor-pointer">
-          <Bell className="w-6 h-6" />
-        </button>
+        <div className="relative">
+          <button
+            onClick={() => setCreateDropdownOpen(!createDropdownOpen)}
+            className="bg-blue-500 hover:bg-blue-600 text-white font-bold py-2 px-4 rounded-md mr-2 cursor-pointer"
+          >
+            Create new +
+          </button>
+          {createDropdownOpen && (
+            <div className="absolute right-0 mt-2 w-40 bg-white text-black shadow-lg rounded-md overflow-hidden">
+              <a
+                href="/dashboard/clients/create"
+                className="flex items-center w-full px-4 py-2 hover:bg-gray-200 cursor-pointer"
+              >
+                Client
+              </a>
+              <a
+                href="/dashboard/cases/create"
+                className="flex items-center w-full px-4 py-2 hover:bg-gray-200 cursor-pointer"
+              >
+                Case
+              </a>
+            </div>
+          )}
+        </div>
         <div className="relative">
           <button
             onClick={() => setDropdownOpen(!dropdownOpen)}

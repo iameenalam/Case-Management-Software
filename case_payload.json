@@ -1,0 +1,60 @@
+{
+  "case": {
+    "haveMedicare": true,
+    "accidentDateTime": "2022-01-01T00:00:00Z",
+    "accidentPlace": "test",
+    "policeArrived": true,
+    "policePrecinct": "test",
+    "reportFiled": true,
+    "reportNumber": "test",
+    "accidentDetail": "test",
+    "goingTo": "test",
+    "clientRelation": "test",
+    "theOwner": "test",
+    "witness1": "test",
+    "witness2": "test",
+    "witness1Phone": "test",
+    "witness2Phone": "test",
+    "weather": "test",
+    "roadCondition": "test",
+    "metalInBody": true,
+    "pregnant": true,
+    "injuries": "test",
+    "otherInjuries": "test",
+    "brokenBones": "test",
+    "reasonForMRI": "test",
+    "lostConciousness": true
+  },
+  "medicalInformation": {
+    "hospitalName": "test",
+    "byEMS": true,
+    "dateAdmitted": "2022-01-01T00:00:00Z",
+    "dateReleased": "2022-01-01T00:00:00Z",
+    "urgentCareName": "test",
+    "urgentCarePhone": "test",
+    "urgentCareDate": "2022-01-01T00:00:00Z",
+    "otherHospitalName": "test",
+    "otherHospitalDate": "2022-01-01T00:00:00Z"
+  },
+  "employmentInfo": {
+    "employer": "test",
+    "occupation": "test",
+    "employmentAddress": "test",
+    "onTheBooks": true,
+    "filedIncomeTax": true,
+    "missedTimeFromWork": true,
+    "returnedToWork": true,
+    "accidentHappenedDuringWorkingHours": true
+  },
+  "previousAccidents": {
+    "dateOfAccident1": "2022-01-01T00:00:00Z",
+    "dateOfAccident2": "2022-01-01T00:00:00Z",
+    "injuries1": "test",
+    "injuries2": "test",
+    "injuries1Resolved": true,
+    "injuries2Resolved": true,
+    "injuries1Attorney": "test",
+    "injuries2Attorney": "test"
+  },
+  "clientIds": [7, 9]
+}

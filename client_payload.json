@@ -1,0 +1,23 @@
+{
+  "client": {
+    "inTakeBy": "test",
+    "referredBy": "test",
+    "firstName": "test",
+    "lastName": "test",
+    "middleName": "test",
+    "address": "test",
+    "city": "test",
+    "state": "test",
+    "sex": "test",
+    "zip": "test",
+    "phone": "test",
+    "email": "test1@gmail.com",
+    "dateOfBirth": "2022-01-01T00:00:00Z",
+    "homePhone": "test",
+    "workPhone": "test",
+    "ssn": "test",
+    "emergencyContactName": "test",
+    "emergencyContactPhone": "test",
+    "relationshipToEmergencyContact": "test"
+  }
+}

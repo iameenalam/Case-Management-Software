@@ -20,31 +20,33 @@ interface SignupResponse {
   message?: string;
 }
 
-interface CaseData {
-  haveMedicare: boolean;
-  accidentDateTime: string;
-  accidentPlace: string;
-  policeArrived: boolean;
-  policePrecinct: string;
-  reportFiled: boolean;
-  reportNumber: string;
-  accidentDetail: string;
-  goingTo: string;
-  clientRelation: string;
-  theOwner: string;
-  witness1: string;
-  witness2: string;
-  witness1Phone: string;
-  witness2Phone: string;
-  weather: string;
-  roadCondition: string;
-  metalInBody: boolean;
-  pregnant: boolean;
-  injuries: string;
-  otherInjuries: string;
-  brokenBones: string;
-  reasonForMRI: string;
-  lostConciousness: boolean;
+export interface CaseData {
+  case: {
+    haveMedicare: boolean;
+    accidentDateTime: string;
+    accidentPlace: string;
+    policeArrived: boolean;
+    policePrecinct: string;
+    reportFiled: boolean;
+    reportNumber: string;
+    accidentDetail: string;
+    goingTo: string;
+    clientRelation: string;
+    theOwner: string;
+    witness1: string;
+    witness2: string;
+    witness1Phone: string;
+    witness2Phone: string;
+    weather: string;
+    roadCondition: string;
+    metalInBody: boolean;
+    pregnant: boolean;
+    injuries: string;
+    otherInjuries: string;
+    brokenBones: string;
+    reasonForMRI: string;
+    lostConciousness: boolean;
+  };
   medicalInformation: {
     hospitalName: string;
     byEMS: boolean;
@@ -76,30 +78,36 @@ interface CaseData {
     injuries1Attorney: string;
     injuries2Attorney: string;
   };
-  clientIds: number[];
+  clientIds: string;
 }
 
 export interface ClientData {
-  inTakeBy: string;
-  referredBy: string;
-  firstName: string;
-  lastName: string;
-  middleName: string;
-  address: string;
-  city: string;
-  state: string;
-  sex: string;
-  zip: string;
-  phone: string;
-  email: string;
-  dateOfBirth: string;
-  homePhone: string;
-  workPhone: string;
-  ssn: string;
-  emergencyContactName: string;
-  emergencyContactPhone: string;
-  relationshipToEmergencyContact: string;
+  client: {
+    inTakeBy: string;
+    referredBy: string;
+    firstName: string;
+    lastName: string;
+    middleName: string;
+    address: string;
+    city: string;
+    state: string;
+    sex: string;
+    zip: string;
+    phone: string;
+    email: string;
+    dateOfBirth: string;
+    homePhone: string;
+    workPhone: string;
+    ssn: string;
+    emergencyContactName: string;
+    emergencyContactPhone: string;
+    relationshipToEmergencyContact: string;
+  };
 }
+
+const getToken = () => {
+  return localStorage.getItem("token");
+};
 
 export const signup = async (userData: SignupData): Promise<SignupResponse> => {
   const response = await fetch(`${BASE_URL}/signup`, {
@@ -119,93 +127,105 @@ export const login = async (credentials: LoginData): Promise<LoginResponse> => {
   return response.json();
 };
 
-export const createClient = async (clientData: ClientData): Promise<any> => {
+export const createClient = async (clientData: ClientData): Promise<number> => {
+  const token = getToken();
+  if (!token) {
+    throw new Error("No token found");
+  }
   const response = await fetch(`${BASE_URL}/client`, {
     method: "POST",
-    headers: { "Content-Type": "application/json" },
+    headers: {
+      Authorization: `Bearer ${token}`,
+      "Content-Type": "application/json",
+    },
     body: JSON.stringify(clientData),
   });
-  return response.json();
+
+  if (!response.ok) {
+    throw new Error(`HTTP error! Status: ${response.status}`);
+  }
+
+  const data = await response.json();
+  return data.id;
 };
 
-export const getClient = async (id: number): Promise<any> => {
-  const response = await fetch(`${BASE_URL}/client/${id}`, {
-    method: "GET",
-    headers: { "Content-Type": "application/json" },
-  });
-  return response.json();
-};
+export const getClientData = async (id: number): Promise<ClientData> => {
+  const token = getToken();
+  if (!token) {
+    throw new Error("No token found");
+  }
+  try {
+    const response = await fetch(`${BASE_URL}/client/${id}`, {
+      method: "GET",
+      headers: {
+        Authorization: `Bearer ${token}`,
+        "Content-Type": "application/json",
+      },
+    });
 
-export const getClients = async (): Promise<any> => {
-  const response = await fetch(`${BASE_URL}/clients`, {
-    method: "GET",
-    headers: { "Content-Type": "application/json" },
-  });
-  return response.json();
-};
+    if (!response.ok) {
+      throw new Error(`HTTP error! Status: ${response.status}`);
+    }
 
-export const updateClient = async (
-  id: number,
-  clientData: ClientData
-): Promise<any> => {
-  const response = await fetch(`${BASE_URL}/client/${id}`, {
-    method: "PATCH",
-    headers: { "Content-Type": "application/json" },
-    body: JSON.stringify(clientData),
-  });
-  return response.json();
+    const data: ClientData = await response.json();
+    return data;
+  } catch (error: any) {
+    console.error(`Error fetching client with id ${id}:`, error);
+    throw error;
+  }
 };
 
 export const createCase = async (caseData: CaseData): Promise<any> => {
+  const token = getToken();
+  if (!token) {
+    throw new Error("No token found");
+  }
   const response = await fetch(`${BASE_URL}/case`, {
     method: "POST",
-    headers: { "Content-Type": "application/json" },
+    headers: {
+      Authorization: `Bearer ${token}`,
+      "Content-Type": "application/json",
+    },
     body: JSON.stringify(caseData),
   });
   return response.json();
 };
 
-export const getCase = async (id: number): Promise<any> => {
-  const response = await fetch(`${BASE_URL}/case/${id}`, {
-    method: "GET",
-    headers: { "Content-Type": "application/json" },
-  });
-  return response.json();
-};
-
-export const getCases = async (): Promise<any> => {
-  const response = await fetch(`${BASE_URL}/cases`, {
-    method: "GET",
-    headers: { "Content-Type": "application/json" },
-  });
-  return response.json();
-};
-
-export const updateCase = async (
-  id: number,
-  caseData: CaseData
-): Promise<any> => {
-  const response = await fetch(`${BASE_URL}/case/${id}`, {
-    method: "PATCH",
-    headers: { "Content-Type": "application/json" },
-    body: JSON.stringify(caseData),
-  });
-  return response.json();
+export const getCase = async (id: number): Promise<CaseData> => {
+  const token = getToken();
+  if (!token) {
+    throw new Error("No token found");
+  }
+  try {
+    const response = await fetch(`${BASE_URL}/case/${id}`, {
+      method: "GET",
+      headers: {
+        Authorization: `Bearer ${token}`,
+        "Content-Type": "application/json",
+      },
+    });
+    if (!response.ok) {
+      throw new Error(`HTTP error! Status: ${response.status}`);
+    }
+    const data: CaseData = await response.json();
+    return data;
+  } catch (error: any) {
+    console.error(`Error fetching case with id ${id}:`, error);
+    throw error;
+  }
 };
 
 export const linkCaseClient = async (clientIds: number[]): Promise<any> => {
+  const token = getToken();
+  if (!token) {
+    throw new Error("No token found");
+  }
   const response = await fetch(`${BASE_URL}/case-clients`, {
     method: "POST",
-    headers: { "Content-Type": "application/json" },
-    body: JSON.stringify({ clientIds }),
-  });
-  return response.json();
-};
-
-export const deleteCaseClient = async (clientIds: number[]): Promise<any> => {
-  const response = await fetch(`${BASE_URL}/case-clients`, {
-    method: "DELETE",
-    headers: { "Content-Type": "application/json" },
+    headers: {
+      Authorization: `Bearer ${token}`,
+      "Content-Type": "application/json",
+    },
     body: JSON.stringify({ clientIds }),
   });
   return response.json();

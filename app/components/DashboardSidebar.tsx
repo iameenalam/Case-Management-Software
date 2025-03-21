@@ -60,11 +60,7 @@ const DashboardSidebar = () => {
         className="p-4 hover:bg-blue-800 transition duration-200 flex items-center justify-start" // Align items to the start
         style={{ paddingLeft: isCollapsed ? "0.75rem" : "1.5rem" }} // Adjust padding based on collapse state
       >
-        {isCollapsed ? (
-          <ChevronRight size={20} />
-        ) : (
-          <ChevronLeft size={20} />
-        )}
+        {isCollapsed ? <ChevronRight size={20} /> : <ChevronLeft size={20} />}
       </button>
 
       <nav className="mt-2 flex-1">
@@ -79,8 +75,6 @@ const DashboardSidebar = () => {
           />
         ))}
       </nav>
-
-      {/* Remove the bottom section as per the image */}
     </aside>
   );
 };
